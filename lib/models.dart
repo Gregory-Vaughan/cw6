@@ -1,24 +1,36 @@
 class Task {
-  final String id;
-  final String name;
-  final bool isCompleted;
+  String id;
+  String name;
+  bool isCompleted;
+  List<Task> subTasks; 
 
-  Task({required this.id, required this.name, required this.isCompleted});
+  Task({
+    required this.id,
+    required this.name,
+    this.isCompleted = false,
+    this.subTasks = const [],
+  });
 
-  factory Task.fromMap(Map<String, dynamic> data, String id) {
-    return Task(
-      id: id,
-      name: data['name'] ?? '',
-      isCompleted: data['isCompleted'] ?? false,
-    );
-  }
 
-  Map<String, dynamic> toMap() 
-  {
+  Map<String, dynamic> toMap() {
     return {
       'name': name,
       'isCompleted': isCompleted,
+      'subTasks': subTasks.map((e) => e.toMap()).toList(), 
     };
+  }
+
+  
+  factory Task.fromMap(Map<String, dynamic> map, String id) {
+    return Task(
+      id: id,
+      name: map['name'],
+      isCompleted: map['isCompleted'],
+      subTasks: (map['subTasks'] as List?)
+              ?.map((subtask) => Task.fromMap(subtask, ''))
+              .toList() ??
+          [],
+    );
   }
 }
 
@@ -52,3 +64,4 @@ class TimeBlockTask {
     };
   }
 }
+
