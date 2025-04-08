@@ -19,7 +19,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
   CollectionReference get tasksRef => FirebaseFirestore.instance
       .collection('users')
       .doc(widget.user.uid)
-      .collection('tasks');
+      .collection('tasks'); 
 
   Future<void> _addTask() async {
     if (_taskController.text.trim().isEmpty) return;

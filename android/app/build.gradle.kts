@@ -9,16 +9,14 @@ plugins {
     id("com.google.gms.google-services") version "4.4.2" apply false
 }
 
-buildscript 
-{
-    repositories 
-    {
-        google() 
+buildscript {
+    repositories {
+        google()
         mavenCentral()
     }
     dependencies {
         // Add Google Services plugin here
-        classpath("com.google.gms:google-services:4.3.15")  
+        classpath("com.google.gms:google-services:4.3.15")
     }
 }
 
@@ -43,7 +41,7 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
-     defaultConfig {
+    defaultConfig {
         applicationId = "com.example.cw6" // Your package name
         minSdkVersion(23)
         targetSdkVersion(33)
@@ -53,18 +51,20 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true // Enables code shrinking
+            shrinkResources = true // Enables resource shrinking
+            proguardFiles(getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro')
         }
     }
 }
 
-dependencies 
-{
-  implementation("com.google.firebase:firebase-analytics-ktx:21.0.0") // Example dependency
-  implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
+dependencies {
+    implementation("com.google.firebase:firebase-analytics-ktx:21.0.0") // Example dependency
+    implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
 }
 
 flutter {
     source = "../.."
 }
-apply plugin: 'com.google.gms.google-services'  
+
+apply plugin: 'com.google.gms.google-services'

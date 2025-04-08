@@ -2,7 +2,7 @@ class Task {
   String id;
   String name;
   bool isCompleted;
-  List<Task> subTasks; 
+  List<Task> subTasks;
 
   Task({
     required this.id,
@@ -11,16 +11,14 @@ class Task {
     this.subTasks = const [],
   });
 
-
   Map<String, dynamic> toMap() {
     return {
       'name': name,
       'isCompleted': isCompleted,
-      'subTasks': subTasks.map((e) => e.toMap()).toList(), 
+      'subTasks': subTasks.map((e) => e.toMap()).toList(),
     };
   }
 
-  
   factory Task.fromMap(Map<String, dynamic> map, String id) {
     return Task(
       id: id,
@@ -64,4 +62,3 @@ class TimeBlockTask {
     };
   }
 }
-

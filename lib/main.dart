@@ -38,7 +38,7 @@ class AuthGate extends StatelessWidget {
             body: Center(child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasData) {
-          return TaskListScreen(user: snapshot.data!);
+          return TaskListScreen(user: snapshot.data!);  // Pass current user to TaskListScreen
         } else {
           return const LoginScreen();
         }
